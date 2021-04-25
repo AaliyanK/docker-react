@@ -1,0 +1,24 @@
+version: '3'
+services:
+    web:
+        build:  # Might cause an issue as the Dockerfile has a .dev
+            context: . # specify where we want all files for this image to be pulled from
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000" #Map 3000 outside the container to 3000 inside the container
+        volumes:
+            - /app/node_modules # Create this inside the docker container
+            - .:/app # Reference the PWD to the /app folder that we just created
+        environment: 
+            - CHOKIDAR_USEPOLLING=true # Important to make sure changes occur
+    tests:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        command: ["npm","run","test"] #overwrite the startup command
+
