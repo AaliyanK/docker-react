@@ -1,0 +1,17 @@
+language: generic 
+sudo: required # need super user level permissions
+services:
+  - docker 
+
+before_install: # steps that need to happen before testing
+  - docker build -t aaliyank/docker-react -f Dockerfile.dev .
+
+script: # commands needed to run test-suite
+# CI=true runs the tests once and exits
+  - docker run -e CI=true aaliyank/docker-react npm run test
+
+
+
+
+
+
