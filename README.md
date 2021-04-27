@@ -1,1 +1,1 @@
-Learning Docker and CI/CD with AWS deployments for single container React application
+Learning Docker and CI/CD with AWS deployments for a single container React application
