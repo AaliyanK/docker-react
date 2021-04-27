@@ -10,6 +10,20 @@ script: # commands needed to run test-suite
 # CI=true runs the tests once and exits
   - docker run -e CI=true aaliyank/docker-react npm run test
 
+deploy: # How to deploy onto AWS
+  provider: elasticbeanstalk
+  region: "us-east-2" # dependent on where you created your EBS instance
+  app: "docker-react"
+  env: "Dockerreact-env"
+  # Travis will zip your code files and copy them to a bucket that has been created
+  bucket_name: "elasticbeanstalk-us-east-2-410292164022" 
+  bucket_path: "docker-react"
+  on:
+    branch: main # Only deploy code from main branch
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
+  
 
 
 
